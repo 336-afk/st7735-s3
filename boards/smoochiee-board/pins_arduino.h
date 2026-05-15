@@ -58,23 +58,25 @@ static const uint8_t SCK = 18;
 #define FG 3
 
 #define HAS_SCREEN 1
-#define ROTATION 1
+#define ROTATION 0
 #define MINBRIGHT (uint8_t)1
 
 #define USER_SETUP_LOADED 1
-#define ST7789_DRIVER 1
-#define TFT_RGB_ORDER 0
-#define TFT_WIDTH 170
-#define TFT_HEIGHT 320
+#define ST7735_DRIVER 1
+#define ST7735_GREENTAB
+#define TFT_RGB_ORDER 1
+#define TFT_INVERT_ON
+#define TFT_WIDTH 128
+#define TFT_HEIGHT 160
 #define TFT_BACKLIGHT_ON 1
 #define TFT_BL 6
 #define TFT_RST 16
 #define TFT_DC 15
-#define TFT_MISO 8
+#define TFT_MISO -1
 #define TFT_MOSI 17
 #define TFT_SCLK 18
 #define TFT_CS 7
-#define TOUCH_CS -1 // SDCARD_CS to make sure SDCard works
+#define TOUCH_CS -1
 #define SMOOTH_FONT 1
 #define SPI_FREQUENCY 20000000
 #define SPI_READ_FREQUENCY 20000000
