@@ -34,7 +34,7 @@ static const uint8_t SCK = 18;
 #define BTN_ACT LOW
 
 #define RXLED 4
-#define TXLED 5
+#define TXLED 6
 #define LED_ON HIGH
 #define LED_OFF LOW
 
@@ -69,7 +69,7 @@ static const uint8_t SCK = 18;
 #define TFT_WIDTH 128
 #define TFT_HEIGHT 160
 #define TFT_BACKLIGHT_ON 1
-#define TFT_BL 6
+#define TFT_BL 5
 #define TFT_RST 16
 #define TFT_DC 15
 #define TFT_MISO -1
