@@ -216,7 +216,7 @@ void ducky_startKb(HIDInterface *&hid, bool ble) {
         hid->begin(keyboardLayouts[bruceConfig.badUSBBLEKeyboardLayout]);
         hid->setDelay(bruceConfig.badUSBBLEKeyDelay);
 #else
-        mySerial.begin(CH9329_DEFAULT_BAUDRATE, SERIAL_8N1, BAD_RX, BAD_TX);
+        mySerial.begin(CH9329_DEFAULT_BAUDRATE, SERIAL_8N1, SERIAL_RX, SERIAL_TX);
         delay(100);
         hid->begin(mySerial, keyboardLayouts[bruceConfig.badUSBBLEKeyboardLayout]);
         hid->setDelay(bruceConfig.badUSBBLEKeyDelay);
