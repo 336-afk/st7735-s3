@@ -16,13 +16,13 @@ static const uint8_t MOSI = 17;
 static const uint8_t MISO = 8;
 static const uint8_t SCK = 18;
 
-#define SERIAL_RX 2
-#define SERIAL_TX 1
-#define BAD_RX SERIAL_RX
-#define BAD_TX SERIAL_TX
-#define GPS_SERIAL_TX SERIAL_TX
-#define GPS_SERIAL_RX SERIAL_RX
-#define USB_as_HID 1
+//#define SERIAL_RX 2
+//#define SERIAL_TX 1
+//#define BAD_RX SERIAL_RX
+//#define BAD_TX SERIAL_TX
+//#define GPS_SERIAL_TX SERIAL_TX
+//#define GPS_SERIAL_RX SERIAL_RX
+//#define USB_as_HID 1
 
 #define BTN_ALIAS "\"OK\""
 #define HAS_5_BUTTONS
@@ -97,14 +97,14 @@ static const uint8_t SCK = 18;
 
 // RGB LED
 
-#define HAS_RGB_LED 1
-#define RGB_LED 45
-#define LED_TYPE WS2812B
-#define LED_ORDER GRB
-#define LED_TYPE_IS_RGBW 0
-#define LED_COUNT 16
+//#define HAS_RGB_LED 1
+//#define RGB_LED 45
+//#define LED_TYPE WS2812B
+//#define LED_ORDER GRB
+//#define LED_TYPE_IS_RGBW 0
+//#define LED_COUNT 16
 
-#define LED_COLOR_STEP 15
+//#define LED_COLOR_STEP 15
 
 #define XPOWERS_CHIP_BQ25896
 
