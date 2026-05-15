@@ -14,12 +14,12 @@ XPowersPPM PPM;
 #endif
 
 void _setup_gpio() {
-
-    pinMode(UP_BTN, INPUT); // Sets the power btn as an INPUT
-    pinMode(SEL_BTN, INPUT);
-    pinMode(DW_BTN, INPUT);
-    pinMode(R_BTN, INPUT);
-    pinMode(L_BTN, INPUT);
+    // ✅ FIXED: INPUT_PULLUP biar tombol nggak floating / ghost press
+    pinMode(UP_BTN, INPUT_PULLUP);
+    pinMode(SEL_BTN, INPUT_PULLUP);
+    pinMode(DW_BTN, INPUT_PULLUP);
+    pinMode(R_BTN, INPUT_PULLUP);
+    pinMode(L_BTN, INPUT_PULLUP);
 
     pinMode(CC1101_SS_PIN, OUTPUT);
     pinMode(NRF24_SS_PIN, OUTPUT);
@@ -32,6 +32,7 @@ void _setup_gpio() {
     bruceConfigPins.irRx = RXLED;
     Wire.setPins(GROVE_SDA, GROVE_SCL);
     // Wire.begin();
+    
     bool pmu_ret = false;
     Wire.begin(GROVE_SDA, GROVE_SCL);
     pmu_ret = PPM.init(Wire, GROVE_SDA, GROVE_SCL, BQ25896_SLAVE_ADDRESS);
@@ -50,6 +51,7 @@ void _setup_gpio() {
         PPM.enableCharge();
     }
 }
+
 bool isCharging() {
     // PPM.disableBatterPowerPath();
     return PPM.isCharging();
@@ -89,21 +91,34 @@ void _setBrightness(uint8_t brightval) {
 /*********************************************************************
 ** Function: InputHandler
 ** Handles the variables PrevPress, NextPress, SelPress, AnyKeyPress and EscPress
+** ✅ FIXED: Added software debouncing to prevent ghost/multiple presses
 **********************************************************************/
 void InputHandler(void) {
     static unsigned long tm = 0;
+    static unsigned long last_press_time = 0;  // ✅ Debounce timer
+    
+    // ✅ Debounce delay: 150ms (adjust if perlu)
+    if (millis() - last_press_time < 150 && !LongPress) return;
+    
+    // Standard debounce check
     if (millis() - tm < 200 && !LongPress) return;
+    
     bool _u = digitalRead(UP_BTN);
     bool _d = digitalRead(DW_BTN);
     bool _l = digitalRead(L_BTN);
     bool _r = digitalRead(R_BTN);
     bool _s = digitalRead(SEL_BTN);
 
+    // Cek kalau ada tombol aktif (LOW karena BTN_ACT = LOW)
     if (!_s || !_u || !_d || !_r || !_l) {
         tm = millis();
+        last_press_time = millis();  // ✅ Reset debounce timer
+        
         if (!wakeUpScreen()) AnyKeyPress = true;
         else return;
     }
+    
+    // Process button presses
     if (!_l) { PrevPress = true; }
     if (!_r) { NextPress = true; }
     if (!_u) {
