@@ -195,7 +195,7 @@ void ducky_startKb(HIDInterface *&hid, bool ble) {
 
             printStatusBadUSBBLE("USB Host Connected");
 #else
-            mySerial.begin(CH9329_DEFAULT_BAUDRATE, SERIAL_8N1, BAD_RX, BAD_TX);
+            mySerial.begin(CH9329_DEFAULT_BAUDRATE, SERIAL_8N1, SERIAL_RX, SERIAL_TX);
             delay(100);
             hid = new CH9329_Keyboard_();
 #endif
